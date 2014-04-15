@@ -1,0 +1,156 @@
+<!DOCTYPE html><!--HTML5 doctype-->
+<html>
+<head>
+  <title>Your New Application</title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+  <style type="text/css">
+    /* Prevent copy paste for all elements except text fields */
+    *  { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
+    input, textarea  { -webkit-user-select:text; }
+
+  </style>
+   
+         <script src='intelxdk.js'></script>
+  <script type="text/javascript">
+    /* This code is used to run as soon as Intel activates */
+    var onDeviceReady=function(){
+
+      //hide splash screen
+      intel.xdk.device.hideSplashScreen();
+    };
+    document.addEventListener("intel.xdk.device.ready",onDeviceReady,false);
+    </script>
+    <link rel="stylesheet" href="jquery/jquery.mobile-1.4.2.min.css">
+    <script src="jquery/jquery-1.9.1.min.js"></script>
+	<script src="jquery/jquery.mobile-1.4.2.min.js"></script>
+    	<script>
+		
+			var alphabets = [
+					{ "alphabet" : "A" , "for" : "Apple", "image" : "images/apple.jpg"}, 
+					{ "alphabet" : "B" , "for" : "Ball", "image" : "images/ball.jpg" }, 
+					{ "alphabet" : "C" , "for" : "Cat", "image" : "images/cat.jpg" }, 
+					{ "alphabet" : "D" , "for" : "Dog", "image" : "images/dog.jpg" }, 
+					{ "alphabet" : "E" , "for" : "Elephant", "image" : "images/elephant.jpg" }, 
+					{ "alphabet" : "F" , "for" : "Fish", "image" : "images/fish.jpg" }, 
+					{ "alphabet" : "G" , "for" : "Giraffe", "image" : "images/giraffe.jpg" }, 
+					{ "alphabet" : "H" , "for" : "Horse", "image" : "images/horse.jpg" }, 
+					{ "alphabet" : "I" , "for" : "Ice Cream", "image" : "images/ice_cream.jpg" }, 
+					{ "alphabet" : "J" , "for" : "Jug", "image" : "images/jug.jpg" }, 
+					{ "alphabet" : "K" , "for" : "Kite", "image" : "images/kite.jpg" }, 
+					{ "alphabet" : "L" , "for" : "Lion", "image" : "images/lion.jpg" }, 
+					{ "alphabet" : "M" , "for" : "Mango", "image" : "images/mango.jpg" }, 
+					{ "alphabet" : "N" , "for" : "Nest", "image" : "images/nest.jpg" }, 
+					{ "alphabet" : "O" , "for" : "Orange", "image" : "images/orange.jpg" }, 
+					{ "alphabet" : "P" , "for" : "Pig", "image" : "images/pig.jpg" }, 
+					{ "alphabet" : "Q" , "for" : "Quail", "image" : "images/quail.jpg" }, 
+					{ "alphabet" : "R" , "for" : "Rabbit", "image" : "images/rabbit.jpg" }, 
+					{ "alphabet" : "S" , "for" : "Sun", "image" : "images/sun.jpg" }, 
+					{ "alphabet" : "T" , "for" : "Tiger", "image" : "images/tiger.jpg" }, 
+					{ "alphabet" : "U" , "for" : "Umbrella", "image" : "images/umbrella.jpg" }, 
+					{ "alphabet" : "V" , "for" : "Van", "image" : "images/van.jpg" }, 
+					{ "alphabet" : "W" , "for" : "Watch", "image" : "images/watch.jpg" }, 
+					{ "alphabet" : "X" , "for" : "Xylophone", "image" : "images/xylophone.jpg" }, 
+					{ "alphabet" : "Y" , "for" : "Yak", "image" : "images/yak.jpg" }, 
+					{ "alphabet" : "Z" , "for" : "Zebra", "image" : "images/zebra.jpg" }];
+			var randomColor1;
+			var randomColor2 
+			
+			var count;
+			if (count == undefined || count == "" || count == 0) {
+   			    var count = 0;
+   			}
+            
+           			
+			$( document ).ready(function() {
+				randomColors();				   				 			
+				$( "#textId" ).html("<span style='font-weight:bold; font-size: 60px; color: #" + randomColor1 + " !important;'> " + alphabets[count].alphabet + "</span> for <span id='whatId' style='font-style:italic; font-weight:bold; font-size: 40px; color: #FF0000'> what? </span>");				
+			});	
+
+                  $(document).on("pageinit", "#pageone", function() {
+				$("#closeColorDiv").on("tap", function() {					
+						randomColors();						
+						$("#whatId").html("<span style='color: #" + randomColor2 + " !important;'> '" + alphabets[count].for + "' </span>");						
+						$(this).html("<img src='" + alphabets[count].image + "'/>");
+ 						if (count != 0 && alphabets[count].alphabet != "A" ) {
+							$("#buttonLeft").html("<button class='ui-btn ui-btn-inline ui-corner-all'><img src='images/jerry.png'/>Go to '" + alphabets[count-1].alphabet +"'</button>"); 
+								
+						}
+						if (alphabets[count].alphabet != "Z" ) {
+							$("#buttonRight").html("<button class='ui-btn ui-btn-inline ui-corner-all'><img src='images/jerry.png'/>Go to '" + alphabets[count+1].alphabet + "'</button>");
+                            
+						}
+						
+						if (alphabets[count].alphabet == "Z" ) {
+							$("#buttonRight").html("<button class='ui-btn ui-btn-inline ui-corner-all'><img src='images/jerry.png'/>Go to '" + alphabets[0].alphabet + "'</button>");
+                            
+						}				
+				});
+				
+			});
+
+			$(document).on("click", "#buttonRight", function(){				
+			   randomColors();
+			   if (alphabets[count].alphabet == "Z" ) {
+				count = 0;
+                     } else {
+			   	count++;
+			   }
+			   $("#textId").html("<span style='font-weight:bold; font-size: 60px; color: #" + randomColor1 + " !important;'> " + alphabets[count].alphabet + "</span> for <span id='whatId' style='font-style:italic; font-weight:bold; font-size: 40px; color: #FF0000'> what? </span>");				
+			   $("#closeColorDiv").html("<img src='images/lock.jpg'/>");
+ 		         $("#buttonLeft").html("");
+                     $("#buttonRight").html("");
+			});	
+	
+			$(document).on("click", "#buttonLeft", function(){				
+			   randomColors();
+			   count--;
+			   $("#textId").html("<span style='font-weight:bold; font-size: 60px; color: #" + randomColor1 + " !important;'> " + alphabets[count].alphabet + "</span> for <span id='whatId' style='font-style:italic; font-weight:bold; font-size: 40px; color: #FF0000'> what? </span>");				
+			   $("#closeColorDiv").html("<img src='images/lock.jpg'/>");
+ 		         $("#buttonLeft").html("");
+                     $("#buttonRight").html("");
+			});
+
+			function randomColors() {			
+				randomColor1 = Math.floor(Math.random()*16777215).toString(16);
+                  	randomColor2 = Math.floor(Math.random()*16777215).toString(16);
+				if (randomColor1 == "fffff" || randomColor2 == "fffff" ){
+					randomColor1 = "0000FF";
+					randomColor2 = "FF00FF";
+				} 
+			}
+
+			$(document).on("click", "#homeButton", function(){				
+			   randomColors();			   
+			   count = 0;                     
+			   $("#textId").html("<span style='font-weight:bold; font-size: 60px; color: #" + randomColor1 + " !important;'> " + alphabets[count].alphabet + "</span> for <span id='whatId' style='font-style:italic; font-weight:bold; font-size: 40px; color: #FF0000'> what? </span>");				
+			   $("#closeColorDiv").html("<img src='images/lock.jpg'/>");
+ 		         $("#buttonLeft").html("");
+                     $("#buttonRight").html("");
+			});	
+
+
+
+		   </script>
+    <title>VS Alphabets</title>
+</head>
+<body>
+		<div data-role="page" id="pageone" data-theme="d"  data-fullscreen="true" data-position="fixed" data-mini="true" data-cache="false">
+            
+			      <div align="right" height="10%" id="homeButton"><button class="ui-btn ui-btn-inline ui-icon-home ui-btn-icon-notext ui-corner-all ui-shadow">Home</button></div>
+				
+            		<div align="center" data-role="content" id="contentId" height="60%">
+				   <div id="textId" style="font-size: 30px; color: #FF0000;"></div>
+				   <div id="closeColorDiv"><img id="imgId" src="images/lock.jpg"/></div>
+				
+				</div>
+				<div align="center" height="10%">
+					<span id="buttonLeft" img src="images/logo.png"/></span>
+					<span id="buttonRight"></span>
+				</div>
+				
+			
+		</div>
+    
+	</body>
+</html>
