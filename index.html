@@ -54,7 +54,7 @@
 					{ "alphabet" : "Y" , "for" : "Yak", "image" : "images/yak.jpg" }, 
 					{ "alphabet" : "Z" , "for" : "Zebra", "image" : "images/zebra.jpg" }];
 			var randomColor1;
-			var randomColor2 
+			var randomColor2;
 			
 			var count;
 			if (count == undefined || count == "" || count == 0) {
@@ -68,24 +68,26 @@
 			});	
 
                   $(document).on("pageinit", "#pageone", function() {
-				$("#closeColorDiv").on("tap", function() {					
-						randomColors();						
-						$("#whatId").html("<span style='color: #" + randomColor2 + " !important;'> '" + alphabets[count].for + "' </span>");						
-						$(this).html("<img src='" + alphabets[count].image + "'/>");
- 						if (count != 0 && alphabets[count].alphabet != "A" ) {
-							$("#buttonLeft").html("<button class='ui-btn ui-btn-inline ui-corner-all'><img src='images/jerry.png'/>Go to '" + alphabets[count-1].alphabet +"'</button>"); 
+					$("#closeColorDiv").on("tap", function() {								
+						$("#closeColorDiv").hide();
+							randomColors();						
+							$("#whatId").html("<span style='color: #" + randomColor2 + " !important;'> '" + alphabets[count].for + "' </span>");							
+							$("#closeColorDiv").fadeIn(2500);
+							$("#closeColorDiv").html("<img src='" + alphabets[count].image + "'/>");
+							if (count != 0 && alphabets[count].alphabet != "A" ) {
+								$("#buttonLeft").html("<button class='ui-btn ui-btn-inline ui-corner-all'><img src='images/jerry.png'/>Go to '" + alphabets[count-1].alphabet +"'</button>"); 
+									
+							}
+							if (alphabets[count].alphabet != "Z" ) {
+								$("#buttonRight").html("<button class='ui-btn ui-btn-inline ui-corner-all'><img src='images/jerry.png'/>Go to '" + alphabets[count+1].alphabet + "'</button>");
 								
-						}
-						if (alphabets[count].alphabet != "Z" ) {
-							$("#buttonRight").html("<button class='ui-btn ui-btn-inline ui-corner-all'><img src='images/jerry.png'/>Go to '" + alphabets[count+1].alphabet + "'</button>");
-                            
-						}
-						
-						if (alphabets[count].alphabet == "Z" ) {
-							$("#buttonRight").html("<button class='ui-btn ui-btn-inline ui-corner-all'><img src='images/jerry.png'/>Go to '" + alphabets[0].alphabet + "'</button>");
-                            
-						}				
-				});
+							}
+							
+							if (alphabets[count].alphabet == "Z" ) {
+								$("#buttonRight").html("<button class='ui-btn ui-btn-inline ui-corner-all'><img src='images/jerry.png'/>Go to '" + alphabets[0].alphabet + "'</button>");
+								
+							}							
+					});
 				
 			});
 
@@ -132,24 +134,19 @@
 
 
 		   </script>
-    <title>VS Alphabets</title>
+    <title>Alphabets</title>
 </head>
 <body>
-		<div data-role="page" id="pageone" data-theme="d"  data-fullscreen="true" data-position="fixed" data-mini="true" data-cache="false">
-            
-			      <div align="right" height="10%" id="homeButton"><button class="ui-btn ui-btn-inline ui-icon-home ui-btn-icon-notext ui-corner-all ui-shadow">Home</button></div>
-				
-            		<div align="center" data-role="content" id="contentId" height="60%">
-				   <div id="textId" style="font-size: 30px; color: #FF0000;"></div>
-				   <div id="closeColorDiv"><img id="imgId" src="images/lock.jpg"/></div>
-				
-				</div>
-				<div align="center" height="10%">
-					<span id="buttonLeft" img src="images/logo.png"/></span>
-					<span id="buttonRight"></span>
-				</div>
-				
-			
+		<div data-role="page" id="pageone" data-theme="d"  data-fullscreen="true" data-position="fixed" data-mini="true" data-cache="false">            
+			<div align="right" id="homeButton"><button class="ui-btn ui-btn-inline ui-icon-home ui-btn-icon-notext ui-corner-all ui-shadow">Home</button></div>				
+			<div align="center" data-role="content" id="contentId" >
+			   <div id="textId" style="font-size: 30px; color: #FF0000;"></div>
+			   <div id="closeColorDiv"><img id="imgId" src="images/lock.jpg"/></div>				
+			</div>
+			<div align="center" height="10%">
+				<span id="buttonLeft" img src="images/logo.png"/></span>
+				<span id="buttonRight"></span>
+			</div>			
 		</div>
     
 	</body>
