@@ -3,11 +3,13 @@
 <head>
   <title>Your New Application</title>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+  <meta name="viewport" content="width=screen.width; user-scalable=no" />
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" /> -->
   
-    <link rel="stylesheet" href="jquery/jquery.mobile-1.4.2.min.css">
+    <link rel="stylesheet" href="jquery/jquery.mobile-1.4.2.min.css">	
     <script src="jquery/jquery-1.9.1.min.js"></script>
-	<script src="jquery/jquery.mobile-1.4.2.min.js"></script>
+	<script src="jquery/jquery.mobile-1.4.2.min.js"></script>	
+	<script type="text/javascript" charset="utf-8" src="jquery/cordova.js"></script>
     	<script>
 		
 			var alphabets = [
@@ -31,7 +33,7 @@
 					{ "alphabet" : "R" , "for" : "Rabbit", "image" : "images/rabbit.jpg", "audio" : "audio/rabbit.mp3" }, 
 					{ "alphabet" : "S" , "for" : "Sunflower", "image" : "images/sunflower.jpg", "audio" : "audio/sunflower.mp3" }, 
 					{ "alphabet" : "T" , "for" : "Tiger", "image" : "images/tiger.jpg", "audio" : "audio/tiger.mp3" }, 
-					{ "alphabet" : "U" , "for" : "Umbrella", "image" : "images/umbrella.jpg", "audio" : "umbrella.mp3" }, 
+					{ "alphabet" : "U" , "for" : "Umbrella", "image" : "images/umbrella.jpg", "audio" : "audio/umbrella.mp3" }, 
 					{ "alphabet" : "V" , "for" : "Van", "image" : "images/van.jpg", "audio" : "audio/van.mp3" }, 
 					{ "alphabet" : "W" , "for" : "Watermelon", "image" : "images/watermelon.jpg", "audio" : "audio/watermelon.mp3" }, 
 					{ "alphabet" : "X" , "for" : "Xylophone", "image" : "images/xylophone.jpg" , "audio" : "audio/xylophone.mp3" }, 
@@ -55,9 +57,10 @@
 				$("#closeColorDiv").on("tap", function() {					
 					randomColors();						
 					$("#whatId").html("<span style='color: #" + randomColor2 + " !important;'> '" + alphabets[count].for + "' </span>");						
-					$(this).html("<img src='" + alphabets[count].image + "'/> ");	
+					$(this).html("<img src='" + alphabets[count].image + "'/> ");
+					playAudio(alphabets[count].audio);
                     				
-					$(audioDiv).html("<audio autoplay> <source src='" + alphabets[count].audio + "' type='audio/mpeg'>  </audio>");
+					<!-- $(audioDiv).html("<audio autoplay preload='auto'> <source src='" + alphabets[count].audio + "' type='audio/mpeg'>  </audio>"); -->
 						
 				});
 				
@@ -99,7 +102,22 @@
  		         
 			});	
 
+			function playAudio(src) {
+				// Create Media object from src
+				my_media = new Media(src, onSuccess, onError);
+				// Play audio
+				my_media.play();
+			}
+			
+			function onSuccess() {
+				
+			}
 
+			// onError Callback 
+			//
+			function onError(error) {
+				
+			}
 
 		   </script>
     <style type="text/css">
@@ -107,10 +125,12 @@
             min-height:50%;
             min-width:50%;
         }
-    </style>    
+    </style>   
+
+
     <title>Alphabets</title>
 </head>
-<body>
+<body> 
 		<div data-role="page" id="pageone" data-theme="d"  data-fullscreen="true" data-position="fixed" >
             
 			      <div align="right" id="homeButton"><button class="ui-btn ui-btn-inline ui-icon-home ui-btn-icon-notext ui-corner-all ui-shadow">Home</button></div>
@@ -119,13 +139,19 @@
 				   <div id="textId" style="font-size: 30px; color: #FF0000;"></div>
 				   <div id="closeColorDiv"><img id="imgId" src="images/lock.jpg"/></div>
 				   <div id="audioDiv"></div>
+				   
+				   
 				  				
 				</div>	
 				
-				
-				
-			
+					
 		</div>
+				
+				
+				
+				
+				
+		
     
 	</body>
 </html>
